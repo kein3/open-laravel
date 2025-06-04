@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil</title>
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="text-center space-y-4">
-            <h1 class="text-4xl font-bold text-blue-600">Bienvenue sur notre application !</h1>
-            <a href="#" class="text-indigo-500 underline">Contact</a>
-        </div>
+@extends('layout')
+
+@section('content')
+    <h1 class="text-2xl font-semibold mb-4">Bienvenue sur votre intranet</h1>
+    <div class="bg-white p-4 rounded shadow mb-6">
+        Jean Dupont - Responsable projet
     </div>
-</body>
-</html>
+    <h2 class="text-xl font-semibold mb-2">Activité récente</h2>
+    <ul class="space-y-2">
+        <li class="bg-white p-3 rounded shadow">Création du projet "Alpha"</li>
+        <li class="bg-white p-3 rounded shadow">Message de l'équipe Marketing</li>
+        <li class="bg-white p-3 rounded shadow">Mise à jour du planning</li>
+    </ul>
+@endsection
