@@ -1,4 +1,4 @@
-<?php
+?php
 
 /*
  * This file is part of Psy Shell.
@@ -76,14 +76,14 @@ class HistoryCommand extends Command
             ])
             ->setDescription('Show the Psy Shell history.')
             ->setHelp(
-                <<<'HELP'
+                'HELP'
 Show, search, save or replay the Psy Shell history.
 
 e.g.
-<return>>>> history --grep /[bB]acon/</return>
-<return>>>> history --show 0..10 --replay</return>
-<return>>>> history --clear</return>
-<return>>>> history --tail 1000 --save somefile.txt</return>
+return>>>> history --grep /[bB]acon/</return>
+return>>>> history --show 0..10 --replay</return>
+return>>>> history --clear</return>
+return> history --tail 1000 --save somefile.txt</return>
 HELP
             );
     }
