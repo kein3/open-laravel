@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
     <title>Accueil</title>
+    @vite('resources/css/app.css')
 </head>
-<body>
-    <h1>Bienvenue sur notre application !</h1>
-    <a href="{{ url('/contact') }}">
-        <button>Contact</button>
-    </a>
+<body class="bg-gray-100 text-gray-800">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="text-center space-y-4">
+            <h1 class="text-4xl font-bold text-blue-600">Bienvenue sur notre application !</h1>
+            <a href="#" class="text-indigo-500 underline">Contact</a>
+        </div>
+    </div>
 </body>
 </html>
