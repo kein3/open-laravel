@@ -70,3 +70,4 @@ cp .env.example .env
 php artisan key:generate
 ./vendor/bin/phpunit
 ```
+VITE_DEV_SERVER=true
