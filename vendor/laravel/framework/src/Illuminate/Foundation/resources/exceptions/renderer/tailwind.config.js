@@ -7,7 +7,6 @@ module.exports = {
         './resources/js/**/*.js',
         './resources/**/*.vue',
     ],
-    darkMode: 'class',
     theme: {
         extend: {
             fontFamily: {
