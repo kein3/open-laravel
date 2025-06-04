@@ -5,7 +5,7 @@
     <title>@yield('title', 'Dashboard')</title>
 
     {{-- CSS & JS compilés par Vite --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/dashboard.js'])
 </head>
 <body class="bg-gray-100 font-sans antialiased">
     @include('partials.nav')
