@@ -59,3 +59,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Testing
+
+To run the automated tests, ensure PHP (>=8.2) and Composer are installed. Then install dependencies and generate an application key:
+
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+./vendor/bin/phpunit
+```
