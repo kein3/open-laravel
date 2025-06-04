@@ -16,4 +16,11 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_the_dashboard_route_is_accessible(): void
+    {
+        $response = $this->get('/dashboard');
+
+        $response->assertStatus(200);
+    }
 }
