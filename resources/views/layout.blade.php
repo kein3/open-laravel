@@ -1,13 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <title>@yield('title', 'Dashboard')</title>
+
+    {{-- CSS & JS compilés par Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-gray-100">
-    {{-- ici on injecte la section body --}}
-    @yield('body')
+<body class="bg-gray-100 font-sans antialiased">
+    @include('partials.nav')
+
+    <main class="p-6">
+        @yield('content')
+    </main>
+ @stack('scripts')
 </body>
 </html>
