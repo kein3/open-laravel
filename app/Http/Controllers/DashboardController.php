@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use App\Models\Order;
 
 class DashboardController extends Controller
 {
@@ -12,8 +12,8 @@ class DashboardController extends Controller
         // Exemples de stats ; adaptez à votre schéma
         $stats = [
             'users'   => User::count(),
-            'orders'  => DB::table('orders')->count(),
-            'revenue' => DB::table('orders')->sum('total'),
+            'orders'  => Order::count(),
+            'revenue' => Order::sum('total'),
         ];
 
         // Données fictives pour un graphique (6 derniers mois)
