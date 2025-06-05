@@ -1,6 +1,5 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 
 // Route temporaire pour assigner le rôle "admin" à l'utilisateur ID=1
 Route::get('/assign-admin-temp', function () {
