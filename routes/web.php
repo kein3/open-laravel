@@ -11,7 +11,7 @@ Route::middleware('auth')->group(function () {
 
 if (env('ENABLE_ADMIN_ASSIGN_TEMP', false)) {
     // Route temporaire pour assigner le rôle "admin" à l'utilisateur ID=1
-    Route::get('/assign-admin-temp', function () {
+    Route::middleware('auth')->get('/assign-admin-temp', function () {
         $user = User::find(1);
         if (! $user) {
             return "L'utilisateur ID=1 n'existe pas";

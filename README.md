@@ -52,6 +52,14 @@ Run the test suite with:
 composer test
 ```
 
+## Security
+
+`ENABLE_ADMIN_ASSIGN_TEMP` enables a temporary route, `/assign-admin-temp`,
+which grants the `admin` role to the user with ID=1. The route is protected by
+the `auth` middleware but should be used only for local setup. Do **not**
+enable this flag in production. If still required, add further protections or
+remove the route before deploying.
+
 ## License
 
 This project is open-sourced software licensed under the MIT license.
