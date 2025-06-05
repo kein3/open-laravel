@@ -34,6 +34,16 @@ php artisan serve
 
 Visit `http://localhost:8000` to view the application. The goal of this project is to provide a simple intranet where internal users can manage orders and view dashboard statistics.
 
+## Building for Production
+
+Compile the assets for production with:
+
+```bash
+npm run build
+```
+
+Copy the resulting `public/build` directory to your server. Ensure that the web server's document root points to the `public/` directory.
+
 ## Testing
 
 Run the test suite with:
