@@ -1,4 +1,20 @@
+/* 1. On conserve impérativement ces trois lignes en tête */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 2. Boutons noirs appliqués à toutes les balises <button> ou input[type="submit"] :
+   → bg-black + texte blanc + arrondi prononcé + hover + ombre + transition */
+button,
+[type="submit"],
+[type="button"] {
+  @apply bg-black text-white font-medium px-5 py-2.5 rounded-xl hover:bg-indigo-600 shadow transition duration-150;
+}
+
+/* 3. Classe “btn-noir” pour les <a> qui doivent ressembler à des boutons */
+a.btn-noir {
+  @apply bg-black text-white font-medium px-5 py-2.5 rounded-xl hover:bg-indigo-600 shadow transition duration-150;
+}
+
+/* 4. (Optionnel) Tout lien <a> direct peut reprendre btn-noir :
+   a[class*="btn"] { @apply … } mais ici on se limite à “a.btn-noir”. */
