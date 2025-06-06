@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Patch spécial Codespaces : forcer le root URL
+        if (env('APP_URL')) {
+            URL::forceRootUrl(env('APP_URL'));
+        }
+
+        // Si tu veux forcer https (fortement conseillé sur Codespaces) :
+        if (str_starts_with(env('APP_URL'), 'https://')) {
+            URL::forceScheme('https');
+        }
     }
 }
