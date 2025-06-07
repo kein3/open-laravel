@@ -42,8 +42,7 @@ class AuthenticatedSessionController extends Controller
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
-    // Redirection explicite vers la page login
-    return redirect()->route('login');
+    // Redirection EXPLICITE vers /login
+    return redirect('/login');
 }
-
 }
