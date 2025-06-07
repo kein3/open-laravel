@@ -248,4 +248,5 @@ cd /workspaces/open-laravel
 git add .
 git commit -m "Message"
 git push origin main
+git push cpanel main
 
