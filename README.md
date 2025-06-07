@@ -243,4 +243,9 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ---
 
+Comment push : 
+cd /workspaces/open-laravel
+git add .
+git commit -m "Message"
+git push origin main
 

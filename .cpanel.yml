@@ -1,0 +1,14 @@
+---
+deployment:
+  tasks:
+    # 1) Installe les dépendances PHP sans le dev, optimise l’autoloader
+    - composer install --no-dev --optimize-autoloader
+    # 2) Installe les assets JS/CSS et génère la version optimisée
+    - npm install
+    - npm run build
+    # 3) Génère la clé si besoin (en force pour l’hébergeur)
+    - php artisan key:generate --force
+    # 4) Exécute les migrations en force (prudence en prod !)
+    - php artisan migrate --force
+    # 5) Crée le lien vers storage
+    - php artisan storage:link
