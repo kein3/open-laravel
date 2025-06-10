@@ -13,11 +13,6 @@ use App\Http\Controllers\DashboardController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
 // Redirection page d’accueil → dashboard
@@ -30,7 +25,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-// Profil utilisateur
+// Profil utilisateur (auth obligatoire)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -39,8 +34,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+// ===============================
+//      ROUTES UTILISATEUR
+// ===============================
+
 // Groupe de routes pour la gestion de fichiers (auth obligatoire)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/files', [FileShareController::class, 'index'])->name('files.index');
     Route::post('/files/upload', [FileShareController::class, 'upload'])->name('files.upload');
     Route::get('/files/download/{id}', [FileShareController::class, 'download'])->name('files.download');
@@ -67,4 +66,3 @@ Route::middleware(['auth', 'admin'])
         // Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         // Route::resource('users', AdminUserController::class);
     });
-

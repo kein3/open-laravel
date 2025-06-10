@@ -63,19 +63,25 @@ class FileShareController extends Controller
 
 
     // Suppression sécurisée
-    public function destroy($id)
-    {
-        $file = FileShare::findOrFail($id);
+    public function analyze($id)
+{
+    $file = File::findOrFail($id);
 
-        // Vérifie si propriétaire OU admin
-        if ($file->user_id !== auth()->id() && !auth()->user()->is_admin) {
-            abort(403, "Vous n'êtes pas autorisé à supprimer ce fichier.");
-        }
-
-        Storage::disk('private')->delete($file->path);
-        $file->delete();
-        return redirect()->route('files.index')->with('success', 'Fichier supprimé.');
+    // Vérifie que l'utilisateur a le droit d'analyser ce fichier (sécurité)
+    if ($file->user_id !== Auth::id() && !Auth::user()->is_admin) {
+        abort(403, 'Accès interdit');
     }
+
+    // Chemin complet du fichier PDF
+    $filePath = storage_path('app/private/' . $file->path);
+
+    // Extraction texte
+    $parser = new Parser();
+    $pdf    = $parser->parseFile($filePath);
+    $text   = $pdf->getText();
+
+    // ... (suite de l’analyse OpenAI à venir)
+}
 
     // Analyse sécurisée
     public function analyze($id)
