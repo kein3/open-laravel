@@ -1,80 +1,7 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-___________________
-
-Bien sûr, voici un **README complet**, adapté à ton projet Laravel Intranet sur Codespaces + cPanel, pensé pour un développeur débutant ou intermédiaire :
-
----
-
-````markdown
 # 🚀 Intranet Laravel - HoliProject
 
-Ce projet est un intranet minimaliste, moderne et évolutif, développé sous Laravel 10, prêt à être utilisé et déployé sur Codespaces ou un hébergement cPanel.
+Ce projet est un intranet minimaliste, moderne, sécurisé et évolutif, développé sous Laravel 10+, prêt pour le travail collaboratif et l’intégration d’outils IA.
 
 ---
 
@@ -83,134 +10,163 @@ Ce projet est un intranet minimaliste, moderne et évolutif, développé sous La
 - [Fonctionnalités](#fonctionnalités)
 - [Installation & développement local (Codespaces)](#installation--développement-local-codespaces)
 - [Déploiement sur cPanel](#déploiement-sur-cpanel)
-- [Structure du projet](#structure-du-projet)
-- [Personnalisation du design](#personnalisation-du-design)
+- [Gestion des assets (Vite/Tailwind)](#gestion-des-assets-vitetailwind)
+- [Gestion des utilisateurs](#gestion-des-utilisateurs)
 - [Variables d'environnement `.env`](#variables-denvironnement-env)
+- [Bonnes pratiques & maintenance](#bonnes-pratiques--maintenance)
+- [Procédures courantes](#procédures-courantes)
 - [Crédits](#crédits)
 
 ---
 
 ## Fonctionnalités
 
-- **Gestion des utilisateurs** (inscription, connexion, profil)
-- **Partage de fichiers** (upload, téléchargement, suppression)
-- **Analyse IA (OpenAI)** : possibilité d’analyser un fichier texte (ou PDF si la librairie est installée) et d’en obtenir un résumé automatique via OpenAI Playground
-- **Dashboard** dynamique : bienvenue personnalisée, accès rapide, chiffres clés, derniers fichiers
-- **Design responsive et épuré** avec Tailwind CSS
+- **Authentification** (login uniquement : seul l’admin peut créer des comptes via Tinker ou migration)
+- **Partage et gestion de fichiers** (upload, téléchargement, suppression, listing)
+- **Intégration IA** (envoi de fichier à OpenAI, résumé automatisé, mini-playground)
+- **Mini-dashboard dynamique** (statistiques clés, derniers fichiers, liens rapides)
+- **Design responsive & minimaliste** (Tailwind CSS, Dark/Light facile à modifier)
+- **Déploiement facile sur Codespaces & cPanel**
+- **Sécurité par défaut** (routes protégées, maintenance, sessions sécurisées)
 
 ---
 
 ## Installation & développement local (Codespaces)
 
-### 1. Cloner le projet dans un Codespace GitHub
+1. **Cloner le projet**
 
-- Crée un nouveau Codespace depuis le repo GitHub [kein3/open-laravel](https://github.com/kein3/open-laravel.git).
+   Ouvre un Codespace sur [kein3/open-laravel](https://github.com/kein3/open-laravel.git)
 
-### 2. Installer les dépendances
+2. **Dépendances**
 
-```bash
-composer install
-npm install
+   ```bash
+   composer install
+   npm install
 ````
 
-### 3. Générer le fichier `.env`
+3. **Configuration locale**
 
-```bash
-cp .env.example .env
-php artisan key:generate
-```
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-**Ajoute tes clés OpenAI, DB, etc. dans `.env`**
+   * Pour tester sans base MySQL, utilise SQLite :
 
-### 4. Utiliser SQLite pour le dev rapide (optionnel)
+     ```
+     DB_CONNECTION=sqlite
+     DB_DATABASE=/workspaces/open-laravel/database/database.sqlite
+     ```
 
-Dans `.env` :
+     ```bash
+     touch database/database.sqlite
+     ```
 
-```
-DB_CONNECTION=sqlite
-DB_DATABASE=/workspaces/open-laravel/database/database.sqlite
-```
+   * Sinon, configure ta base comme d’habitude.
 
-```bash
-touch database/database.sqlite
-```
+4. **Migrations**
 
-### 5. Lancer les migrations et les assets
+   ```bash
+   php artisan migrate
+   ```
 
-```bash
-php artisan migrate
-npx tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --minify
-```
+5. **Build assets**
 
-### 6. Démarrer le serveur
+   ```bash
+   npm run dev
+   ```
 
-```bash
-php artisan serve --host=0.0.0.0 --port=8001
-```
+6. **Démarrer le serveur**
 
-> **Ouvre l’URL donnée par Codespaces (généralement [https://xxxx-xxxx-8001.app.github.dev](https://xxxx-xxxx-8001.app.github.dev)) pour accéder à l’app.**
+   ```bash
+   php artisan serve --host=0.0.0.0 --port=8001
+   ```
+
+   Accède à l’URL Codespaces fournie.
 
 ---
 
 ## Déploiement sur cPanel
 
-1. **Ajoute un “Git Version Control” dans cPanel**
+1. **Ajouter un dépôt Git sur cPanel**
 
-   * Repo : `https://github.com/kein3/open-laravel.git`
-   * Path : `/home/holiprojectcom/laravel`
+   * URL du dépôt : `https://github.com/kein3/open-laravel.git`
+   * Chemin du repo : `/home/holiprojectcom/laravel`
 
-2. **Variables d’environnement**
+2. **Déployer la branche `main`**
 
-   * Configure la base MySQL, la clé OpenAI, l’`APP_KEY`, etc. via l’interface cPanel ou le fichier `.env` (copié à la main si besoin).
-
-3. **Dépendances**
-
-   * Via Terminal cPanel :
+   * Soit via l’interface Git de cPanel
+   * Soit en SSH :
 
      ```bash
-     composer install --optimize-autoloader --no-dev
-     npm install
-     npm run build
-     php artisan key:generate --force
-     php artisan migrate --force
-     php artisan storage:link
+     cd /home/holiprojectcom/laravel
+     git pull origin main
      ```
 
-4. **Assure-toi que le dossier public du domaine pointe sur `/laravel/public`.**
+3. **Installer les dépendances**
+
+   ```bash
+   composer install --no-dev --optimize-autoloader
+   npm install
+   npm run build
+   php artisan key:generate --force
+   php artisan migrate --force
+   php artisan storage:link
+   ```
+
+4. **Gérer le dossier `/public/build`**
+
+   * Si tu ne peux pas builder côté serveur :
+
+     * Build les assets localement ou sur Codespaces :
+
+       ```bash
+       npm run build
+       cd public
+       zip -r build.zip build
+       ```
+     * Upload puis extract `build.zip` dans `/home/holiprojectcom/laravel/public` via File Manager cPanel.
+
+5. **Assure-toi que le DocumentRoot de ton (sous-)domaine pointe sur `/home/holiprojectcom/laravel/public`.**
 
 ---
 
-## Structure du projet
+## Gestion des assets (Vite/Tailwind)
 
-* `app/Http/Controllers` : Logique des fichiers, OpenAI, Dashboard, etc.
-* `resources/views` :
-
-  * `dashboard.blade.php` (Dashboard)
-  * `files/` (partage de fichiers)
-  * `openai/` (mini-playground IA)
-  * `layouts/` (structure commune, menu…)
-* `public/css/app.css` : CSS Tailwind personnalisé
-* `.env` : paramètres sensibles (ne jamais commiter !)
+* **Les fichiers du dossier `/public/build` ne sont pas trackés par git**
+* Tu dois les builder localement (voir ci-dessus) **à chaque modification JS/CSS**
+* Les autres fichiers statiques sont gérés automatiquement
 
 ---
 
-## Personnalisation du design
+## Gestion des utilisateurs
 
-* **Boutons noirs partout** : via la classe CSS globale ou la classe `.btn-noir`.
-* **Layout** : personnalisation dans `resources/views/layouts/app.blade.php`
-* **Alertes, cartes, widgets** : voir les exemples dans chaque vue.
+* **Inscription publique désactivée**
+* Seul l’admin peut créer un compte :
+
+  * Via `php artisan tinker` :
+
+    ```php
+    \App\Models\User::create([
+      'name' => 'NOM',
+      'email' => 'adresse@mail.com',
+      'password' => bcrypt('motdepasse'),
+    ]);
+    ```
+* La page d’accueil (`/`) redirige vers `/dashboard` (protégé par `auth`).
+* Le logout redirige explicitement vers `/login`.
 
 ---
 
-## Variables d'environnement `.env`
+## Variables d’environnement `.env`
 
-Exemple (à adapter en prod) :
+À copier depuis `.env.example`, puis à adapter selon l’environnement.
 
-```
+```dotenv
 APP_NAME="HoliProject Intranet"
 APP_ENV=production
-APP_KEY=base64:xxxxxxx
-APP_URL=https://ton-domaine.com
+APP_KEY=base64:...
+APP_URL=https://open.holiproject.com
 
 DB_CONNECTION=mysql
 DB_HOST=localhost
@@ -222,31 +178,80 @@ DB_PASSWORD=********
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
+**Ne jamais commit le vrai `.env` !**
+
+---
+
+## Bonnes pratiques & maintenance
+
+* **Mode maintenance** :
+  `php artisan down` / `php artisan up`
+* **Cache** (à vider en cas de modif config) :
+
+  ```bash
+  php artisan config:clear
+  php artisan config:cache
+  php artisan route:clear
+  php artisan view:clear
+  ```
+* **Vérification logs** :
+
+  ```bash
+  tail -n 30 storage/logs/laravel.log
+  ```
+
+---
+
+## Procédures courantes
+
+### Push/Mise à jour du code
+
+```bash
+cd /workspaces/open-laravel
+git add .
+git commit -m "Message"
+git push origin main
+git push cpanel main  # (si configuré)
+```
+
+### Mise à jour des assets
+
+* Builder en local/Codespaces :
+
+  ```bash
+  npm run build
+  cd public
+  zip -r build.zip build
+  ```
+* Upload et extract sur le serveur
+
+### Créer un nouvel utilisateur (admin seulement)
+
+```bash
+php artisan tinker
+# puis
+\App\Models\User::create([
+  'name' => 'NouveauUser',
+  'email' => 'email@exemple.com',
+  'password' => bcrypt('motdepasse'),
+]);
+```
+
 ---
 
 ## Crédits
 
-* Projet initial par Kevin Vie (@kein3)
-* Design et base technique : Laravel Breeze, Tailwind CSS
-* API IA : [OpenAI Playground](https://platform.openai.com/playground)
-* PDF parser (optionnel) : [smalot/pdfparser](https://github.com/smalot/pdfparser)
+* Développé par Kevin Vie (@kein3) pour HoliProject
+* Stack : Laravel Breeze, Tailwind, OpenAI API
+* Icônes, styles, inspirations : [shadcn/ui](https://ui.shadcn.com/), [Laravel Breeze](https://laravel.com/docs/starter-kits)
 
 ---
 
-**Pour toute question, ouvre une issue sur le repo ou contacte le mainteneur.**
+**Pour toute question, ouvrez une issue GitHub ou contactez le mainteneur du repo.**
 
 ---
 
 **Bon développement !**
 
 ```
-
----
-
-Comment push : 
-cd /workspaces/open-laravel
-git add .
-git commit -m "Message"
-git push origin main
-git push cpanel main
 

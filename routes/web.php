@@ -6,7 +6,8 @@ use App\Http\Controllers\FileShareController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\DashboardController;
 
-
+// (Décommente si tu ajoutes un vrai contrôleur d’admin)
+// use App\Http\Controllers\Admin\AdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,15 +20,17 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
+// Redirection page d’accueil → dashboard
 Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+// Dashboard classique (auth + email vérifié)
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
+// Profil utilisateur
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -36,8 +39,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
-
+// Groupe de routes pour la gestion de fichiers (auth obligatoire)
 Route::middleware(['auth'])->group(function () {
     Route::get('/files', [FileShareController::class, 'index'])->name('files.index');
     Route::post('/files/upload', [FileShareController::class, 'upload'])->name('files.upload');
@@ -48,4 +50,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/openai', [OpenAIController::class, 'send'])->name('openai.send');
 });
 
+// ===============================
+//      ROUTES ADMIN PROTÉGÉES
+// ===============================
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        // Exemple : test de l'accès admin
+        Route::get('/test', function () {
+            return 'Espace admin : accès OK !';
+        })->name('test');
+
+        // Ici tu pourras ajouter toutes tes routes réservées aux admins
+        // Exemple à décommenter si tu ajoutes un vrai contrôleur :
+        // Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        // Route::resource('users', AdminUserController::class);
+    });
 
