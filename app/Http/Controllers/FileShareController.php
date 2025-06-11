@@ -102,19 +102,21 @@ class FileShareController extends Controller
                 . "prix, superficie, localisation, nombre de pièces, type de bien, et toute autre info pertinente ? "
                 . "Format attendu : {\"prix\":..., \"superficie\":..., \"localisation\":..., \"nombre_pieces\":..., \"type_bien\":..., \"autres_infos\":...}";
 
-        $response = Http::withToken($apiKey)
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-3.5-turbo',
-                'messages' => [
-                    ['role' => 'user', 'content' => $prompt],
-                ],
-                'max_tokens' => 400,
-            ]);
+        $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . $apiKey,
+        'Content-Type' => 'application/json',
+    ])
+    ->post('https://api.openai.com/v1/chat/completions', [
+        'model' => 'gpt-3.5-turbo',
+        'messages' => [
+            [
+                'role' => 'user',
+                'content' => $prompt,
+            ],
+        ],
+        'max_tokens' => 400,
+    ]);
 
-        $body = $response->json();
-        $answer = $body['choices'][0]['message']['content'] ?? 'Pas de réponse.';
-        // Pour debug :
-        dd($body);
 
 
         // Essaie de décoder le JSON envoyé par l'IA
