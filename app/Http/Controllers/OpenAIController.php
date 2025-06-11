@@ -19,18 +19,26 @@ class OpenAIController extends Controller
     ]);
 
     $apiKey = env('OPENAI_API_KEY');
-    $response = \Illuminate\Support\Facades\Http::withToken($apiKey)
-        ->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ['role' => 'user', 'content' => $request->prompt],
-            ],
-            'max_tokens' => 300,
-        ]);
+    if (!$apiKey) {
+        return back()->withErrors(['openai' => 'Clé API OpenAI manquante.']);
+    }
+
+    try {
+        $response = \Illuminate\Support\Facades\Http::withToken($apiKey)
+            ->post('https://api.openai.com/v1/chat/completions', [
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'user', 'content' => $request->prompt],
+                ],
+                'max_tokens' => 300,
+            ]);
+    } catch (\Exception $e) {
+        return back()->withErrors(['openai' => 'Erreur de connexion à OpenAI: '.$e->getMessage()]);
+    }
 
     if ($response->failed()) {
         // Affiche le vrai message d’erreur OpenAI
-        return back()->withErrors(['openai' => $response->json()['error']['message'] ?? 'Erreur inconnue']);
+        return back()->withErrors(['openai' => $response->json()['error']['message'] ?? 'Erreur OpenAI']);
     }
 
     $body = $response->json();

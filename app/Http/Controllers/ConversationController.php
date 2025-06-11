@@ -128,16 +128,28 @@ class ConversationController extends Controller
         $text = mb_substr($text, 0, 3000);
 
         $apiKey = env('OPENAI_API_KEY');
+        if (!$apiKey) {
+            return back()->with('error', 'Clé API OpenAI manquante.');
+        }
+
         $prompt = "Voici le contenu d'un document.\n\n$text\n\nPeux-tu en faire un résumé ?";
 
-        $response = Http::withToken($apiKey)
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-3.5-turbo',
-                'messages' => [
-                    ['role' => 'user', 'content' => $prompt],
-                ],
-                'max_tokens' => 400,
-            ]);
+        try {
+            $response = Http::withToken($apiKey)
+                ->post('https://api.openai.com/v1/chat/completions', [
+                    'model' => 'gpt-3.5-turbo',
+                    'messages' => [
+                        ['role' => 'user', 'content' => $prompt],
+                    ],
+                    'max_tokens' => 400,
+                ]);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur de connexion à OpenAI: '.$e->getMessage());
+        }
+
+        if ($response->failed()) {
+            return back()->with('error', $response->json()['error']['message'] ?? 'Erreur OpenAI');
+        }
 
         $body = $response->json();
         $answer = $body['choices'][0]['message']['content'] ?? 'Pas de réponse.';
