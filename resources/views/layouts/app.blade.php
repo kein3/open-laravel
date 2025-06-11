@@ -15,20 +15,23 @@
     
     {{-- Exemple de navbar --}}
     <nav class="bg-white border-b border-gray-200 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="{{ route('dashboard') }}">Accueil</a>
-
-            <div>
-                @auth
-                    <span class="mr-4">{{ auth()->user()->name }}</span>
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
-                        @csrf
-                        <button class="text-red-600 hover:underline">Déconnexion</button>
-                    </form>
-                @endauth
-            </div>
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div>
+            <a href="{{ route('dashboard') }}" class="font-bold mr-4">Accueil</a>
+            <a href="{{ route('files.index') }}" class="mr-4">Fichiers</a>
         </div>
-    </nav>
+        <div>
+            @auth
+                <span class="mr-4">{{ auth()->user()->name }}</span>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button class="text-red-600 hover:underline">Déconnexion</button>
+                </form>
+            @endauth
+        </div>
+    </div>
+</nav>
+
 
     <main class="py-6">
         @yield('content')
