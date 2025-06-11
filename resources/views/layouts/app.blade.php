@@ -13,8 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body 
-<div>*** SIDEBAR LAYOUT TEST ***</div>
-    ...
+
 class="bg-gray-50 text-gray-900 antialiased">
 <div class="min-h-screen flex">
 
