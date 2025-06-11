@@ -98,19 +98,31 @@ class FileShareController extends Controller
 
         // Appel API OpenAI
         $apiKey = env('OPENAI_API_KEY');
+        if (!$apiKey) {
+            return back()->with('error', 'Clé API OpenAI manquante.');
+        }
+
         $prompt = "Voici le contenu d'un document immobilier.\n\n$text\n\n"
             . "Peux-tu extraire les informations suivantes et les présenter sous forme de JSON : "
             . "prix, superficie, localisation, nombre de pièces, type de bien, et toute autre info pertinente ? "
             . "Format attendu : {\"prix\":..., \"superficie\":..., \"localisation\":..., \"nombre_pieces\":..., \"type_bien\":..., \"autres_infos\":...}";
 
-        $response = Http::withToken($apiKey)
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-3.5-turbo',
-                'messages' => [
-                    ['role' => 'user', 'content' => $prompt],
-                ],
-                'max_tokens' => 400,
-            ]);
+        try {
+            $response = Http::withToken($apiKey)
+                ->post('https://api.openai.com/v1/chat/completions', [
+                    'model' => 'gpt-3.5-turbo',
+                    'messages' => [
+                        ['role' => 'user', 'content' => $prompt],
+                    ],
+                    'max_tokens' => 400,
+                ]);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur de connexion à OpenAI: '.$e->getMessage());
+        }
+
+        if ($response->failed()) {
+            return back()->with('error', $response->json()['error']['message'] ?? 'Erreur OpenAI');
+        }
 
         $body = $response->json();
         $answer = $body['choices'][0]['message']['content'] ?? 'Pas de réponse.';
