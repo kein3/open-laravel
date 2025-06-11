@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 // Dashboard classique (auth + email vérifié)
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('dashboard');
 
 // Profil utilisateur (auth obligatoire)
@@ -39,7 +39,7 @@ require __DIR__.'/auth.php';
 // ===============================
 
 // Groupe de routes pour la gestion de fichiers (auth obligatoire)
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/files', [FileShareController::class, 'index'])->name('files.index');
     Route::post('/files/upload', [FileShareController::class, 'upload'])->name('files.upload');
     Route::get('/files/download/{id}', [FileShareController::class, 'download'])->name('files.download');
