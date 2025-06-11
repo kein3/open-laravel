@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('openai.index')" :active="request()->routeIs('openai.index')">
                         OpenAI Playground
                     </x-nav-link>
+                    <x-nav-link :href="route('conversations.index')" :active="request()->routeIs('conversations.*')">
+                        Conversations
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -65,6 +68,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('openai.index')" :active="request()->routeIs('openai.index')">
                 OpenAI Playground
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('conversations.index')" :active="request()->routeIs('conversations.*')">
+                Conversations
             </x-responsive-nav-link>
         </div>
 
