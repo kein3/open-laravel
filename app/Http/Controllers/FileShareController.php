@@ -117,11 +117,19 @@ class FileShareController extends Controller
 
         // Décodage du JSON OpenAI
         $extracted = null;
-        try {
-            $extracted = json_decode($answer, true);
-        } catch (\Exception $e) {
-            $extracted = null;
+try {
+    $extracted = json_decode($answer, true);
+    // Si $extracted est encore null, on tente un nettoyage simple
+    if (!$extracted) {
+        $jsonStart = strpos($answer, '{');
+        if ($jsonStart !== false) {
+            $jsonString = substr($answer, $jsonStart);
+            $extracted = json_decode($jsonString, true);
         }
+    }
+} catch (\Exception $e) {
+    $extracted = null;
+}
 
         // Enregistre le résultat de l'analyse en BDD
         $file->analysis_json = $extracted ? json_encode($extracted) : null;
