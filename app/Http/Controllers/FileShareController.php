@@ -111,6 +111,9 @@ class FileShareController extends Controller
 
         $body = $response->json();
         $answer = $body['choices'][0]['message']['content'] ?? 'Pas de réponse.';
+        // Pour debug :
+        dd($body);
+
 
         // Essaie de décoder le JSON envoyé par l'IA
         $extracted = null;
