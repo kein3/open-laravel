@@ -6,17 +6,17 @@
 
     <title>{{ config('app.name', 'HoliProject') }}</title>
 
-    {{-- Charge les assets compilés par Vite (Tailwind + JS) --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Assets compilés pour la prod -->
+    <link rel="stylesheet" href="/build/assets/app-DlrseeeD.css">
+    <script type="module" src="/build/assets/app-Bf4POITK.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-900 antialiased">
   {{-- BLA BLA LAYOUT OK --}}
     
-{{-- Exemple de navbar --}}
+    {{-- Exemple de navbar --}}
     <nav class="bg-white border-b border-gray-200 px-4 py-3">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="{{ url('/dashboard') }}">Accueil</a>
-
+            <a href="{{ route('dashboard') }}">Accueil</a>
 
             <div>
                 @auth
