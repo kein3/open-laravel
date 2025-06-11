@@ -127,6 +127,8 @@ class FileShareController extends Controller
         $file->analysis_json = $extracted ? json_encode($extracted) : null;
         $file->analysis_raw = $answer;
         $file->save();
+        dd($extracted, $answer);
+
 
         return view('files.analyze', [
             'file' => $file,
