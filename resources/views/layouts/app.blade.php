@@ -5,28 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'HoliProject') }}</title>
 
-    {{-- Assets compilés --}}
-    <link rel="stylesheet" href="/build/assets/app-DlrseeeD.css">
+    <!-- Assets CSS/JS du build Vite -->
+    <link rel="stylesheet" href="/build/assets/app-DvP21T2e.css"> {{-- Mets ici ton vrai nom CSS buildé --}}
     <script type="module" src="/build/assets/app-Bf4POITK.js"></script>
+
+    <!-- Icônes Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased">
 <div class="min-h-screen flex">
 
     <!-- SIDEBAR -->
     <aside class="w-72 bg-white border-r border-gray-200 flex flex-col px-6 py-8 shadow-lg">
-
-        <!-- Logo / Company -->
         <h1 class="text-2xl font-extrabold mb-8 text-gray-900">{{ config('app.name', 'HoliProject') }}</h1>
 
-        <!-- Profile card -->
         <div class="flex flex-col items-center text-center mb-10">
-            {{-- Avatar cercle – remplace src par <img> si tu as une vraie photo --}}
             <div class="rounded-full bg-gray-200 w-24 h-24 flex items-center justify-center text-3xl font-bold">
                 {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
             </div>
             <h2 class="mt-4 font-semibold">{{ auth()->user()->name }}</h2>
             <p class="text-xs text-gray-500">Utilisateur interne</p>
-
             <div class="flex gap-6 mt-4 text-sm">
                 <div>
                     <span class="font-bold text-gray-800">527</span><br><span class="text-gray-400">Points</span>
@@ -37,7 +35,6 @@
             </div>
         </div>
 
-        <!-- Navigation -->
         <nav class="flex-1">
             <ul class="space-y-2">
                 <li>
@@ -52,11 +49,10 @@
                         <span class="material-symbols-outlined text-lg">folder</span> Fichiers
                     </a>
                 </li>
-                {{-- Ajoute d’autres liens (About, Support…) ici --}}
+                {{-- Ajoute d’autres liens ici si besoin --}}
             </ul>
         </nav>
 
-        <!-- Meetings footer -->
         <div class="mt-10">
             <h3 class="text-sm font-semibold text-gray-600 mb-3">Meetings</h3>
             <div class="bg-gray-100 rounded-xl p-4 text-xs space-y-2">
@@ -74,7 +70,6 @@
             </div>
         </div>
 
-        <!-- Déconnexion -->
         <form action="{{ route('logout') }}" method="POST" class="mt-8">
             @csrf
             <button class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition text-sm">
@@ -85,7 +80,6 @@
 
     <!-- MAIN -->
     <div class="flex-1 flex flex-col">
-        {{-- Barre supérieure optionnelle : search, etc. --}}
         <header class="h-16 bg-white border-b border-gray-200 flex items-center px-8">
             <div class="relative w-full max-w-md">
                 <input type="text" placeholder="Rechercher…"
