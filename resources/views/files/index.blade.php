@@ -23,28 +23,47 @@
         <thead>
             <tr class="border-b">
                 <th class="p-2 text-left">Nom du fichier</th>
+                <th class="p-2 text-left">Analyse IA</th>
                 <th class="p-2">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach($files as $file)
-    <tr class="border-b">
-        <td class="p-2">{{ $file->filename }}</td>
-        <td class="p-2 space-x-2">
-            <a href="{{ route('files.download', $file->id) }}" class="text-blue-600 hover:underline">Télécharger</a>
-            @if(auth()->id() === $file->user_id)
-                <form action="{{ route('files.destroy', $file->id) }}" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-red-600 hover:underline">Supprimer</button>
-                </form>
-            @endif
-            <!-- Bouton Analyser avec OpenAI (pour tous les fichiers, tu peux restreindre aux .txt si tu veux) -->
-            <a href="{{ route('files.analyze', $file->id) }}" class="text-purple-600 hover:underline">Analyser avec OpenAI</a>
-        </td>
-    </tr>
-@endforeach
-
+                <tr class="border-b">
+                    <td class="p-2">{{ $file->filename }}</td>
+                    <td class="p-2">
+                        @if($file->analysis_json)
+                            @php $data = json_decode($file->analysis_json, true); @endphp
+                            <table class="text-sm border bg-gray-50 rounded">
+                                @foreach($data as $key => $value)
+                                    <tr>
+                                        <td class="px-2 py-1 font-semibold">{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
+                                        <td class="px-2 py-1">
+                                            {{ is_array($value) ? implode(', ', $value) : $value }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        @else
+                            <span class="text-gray-500 italic">Non analysé</span>
+                        @endif
+                    </td>
+                    <td class="p-2 space-x-2">
+                        <a href="{{ route('files.download', $file->id) }}" class="text-blue-600 hover:underline">Télécharger</a>
+                        @if(auth()->id() === $file->user_id)
+                            <form action="{{ route('files.destroy', $file->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:underline">Supprimer</button>
+                            </form>
+                        @endif
+                        @if(!$file->analysis_json)
+                            <!-- Bouton Analyser seulement si pas d'analyse enregistrée -->
+                            <a href="{{ route('files.analyze', $file->id) }}" class="text-purple-600 hover:underline">Analyser avec OpenAI</a>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
