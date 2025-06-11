@@ -8,27 +8,47 @@
     <script type="module" src="/build/assets/app-Bf4POITK.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased">
-    <nav class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-20">
-        <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
-            <div class="flex items-center gap-4">
-                <a href="{{ route('dashboard') }}" class="text-xl font-bold text-blue-700 hover:text-blue-900 transition">HoliProject</a>
-                <a href="{{ route('files.index') }}" class="text-blue-600 hover:text-blue-800">Fichiers</a>
-                <!-- Ajoute d'autres liens ici -->
+    <div class="min-h-screen flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between py-8 px-6 shadow-md">
+            <div>
+                <div class="flex items-center gap-2 mb-8">
+                    <span class="bg-blue-600 text-white text-xl font-bold rounded-lg px-3 py-1">HoliProject</span>
+                </div>
+                <nav class="flex flex-col gap-2">
+                    <a href="{{ route('dashboard') }}"
+                       class="py-2 px-3 rounded-lg hover:bg-blue-50 {{ request()->routeIs('dashboard') ? 'bg-blue-100 font-semibold text-blue-700' : 'text-gray-700' }}">
+                        Dashboard
+                    </a>
+                    <a href="{{ route('files.index') }}"
+                       class="py-2 px-3 rounded-lg hover:bg-blue-50 {{ request()->routeIs('files.index') ? 'bg-blue-100 font-semibold text-blue-700' : 'text-gray-700' }}">
+                        Fichiers
+                    </a>
+                    {{-- Ajoute d'autres liens ici si besoin --}}
+                </nav>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 mt-8">
                 @auth
-                    <span class="text-sm mr-2">{{ auth()->user()->name }}</span>
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                    <div class="rounded-full bg-blue-600 w-10 h-10 flex items-center justify-center text-white font-bold text-lg uppercase">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
+                    <span class="text-sm">{{ auth()->user()->name }}</span>
+                    <form action="{{ route('logout') }}" method="POST" class="inline ml-2">
                         @csrf
-                        <button class="text-red-500 hover:underline text-sm">Déconnexion</button>
+                        <button class="text-red-500 hover:underline text-sm px-2 py-1">Déconnexion</button>
                     </form>
                 @endauth
             </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <main class="py-10 px-6 flex-1">
+                @yield('content')
+            </main>
+            <footer class="text-center text-xs text-gray-500 py-4">© {{ date('Y') }} HoliProject</footer>
         </div>
-    </nav>
-    <main class="py-8 px-2 min-h-screen">
-        @yield('content')
-    </main>
-    <footer class="text-center text-xs text-gray-500 py-6">© {{ date('Y') }} HoliProject</footer>
+    </div>
 </body>
+
 </html>
