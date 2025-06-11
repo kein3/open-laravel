@@ -60,7 +60,7 @@ class FileShareController extends Controller
         return Storage::disk('private')->download($file->path, $file->filename);
     }
 
-    // Analyse sécurisée et appel à OpenAI
+    // Analyse sécurisée et extraction structurée via OpenAI
     public function analyze($id)
     {
         $file = FileShare::findOrFail($id);
@@ -93,13 +93,18 @@ class FileShareController extends Controller
         // Sécurise la taille envoyée à OpenAI
         $text = mb_substr($text, 0, 3000); // <= 3000 caractères pour éviter la limite
 
-        // Appel API OpenAI
+        // Appel API OpenAI pour extraction structurée
         $apiKey = env('OPENAI_API_KEY');
+        $prompt = "Voici le contenu d'un document immobilier.\n\n$text\n\n"
+                . "Peux-tu extraire les informations suivantes et les présenter sous forme de JSON : "
+                . "prix, superficie, localisation, nombre de pièces, type de bien, et toute autre info pertinente ? "
+                . "Format attendu : {\"prix\":..., \"superficie\":..., \"localisation\":..., \"nombre_pieces\":..., \"type_bien\":..., \"autres_infos\":...}";
+
         $response = Http::withToken($apiKey)
             ->post('https://api.openai.com/v1/chat/completions', [
                 'model' => 'gpt-3.5-turbo',
                 'messages' => [
-                    ['role' => 'user', 'content' => "Voici le contenu d'un fichier :\n\n$text\n\nPeux-tu le résumer en quelques phrases ?"],
+                    ['role' => 'user', 'content' => $prompt],
                 ],
                 'max_tokens' => 400,
             ]);
@@ -107,9 +112,18 @@ class FileShareController extends Controller
         $body = $response->json();
         $answer = $body['choices'][0]['message']['content'] ?? 'Pas de réponse.';
 
+        // Essaie de décoder le JSON envoyé par l'IA
+        $extracted = null;
+        try {
+            $extracted = json_decode($answer, true);
+        } catch (\Exception $e) {
+            $extracted = null;
+        }
+
         return view('files.analyze', [
             'file' => $file,
             'analysis' => $answer,
+            'extracted' => $extracted,
         ]);
     }
 }
