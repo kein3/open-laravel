@@ -95,6 +95,8 @@ class FileShareController extends Controller
 
         // Appel API OpenAI pour extraction structurée
         $apiKey = env('OPENAI_API_KEY');
+        dd(config('services.openai.key'));
+
         $prompt = "Voici le contenu d'un document immobilier.\n\n$text\n\n"
                 . "Peux-tu extraire les informations suivantes et les présenter sous forme de JSON : "
                 . "prix, superficie, localisation, nombre de pièces, type de bien, et toute autre info pertinente ? "
