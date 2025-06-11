@@ -10,13 +10,16 @@
         </div>
     @endif
 
-    <form action="{{ route('files.upload') }}" method="POST" enctype="multipart/form-data" class="mb-8 flex flex-col sm:flex-row gap-2 items-center">
+    <form action="{{ route('files.upload') }}" method="POST" enctype="multipart/form-data"
+          class="mb-8 flex flex-col sm:flex-row gap-2 items-center">
         @csrf
         <input type="file" name="file" class="border p-2 rounded flex-1" required>
         @error('file')
             <p class="text-red-500 text-sm">{{ $message }}</p>
         @enderror
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">Télécharger</button>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">
+            Télécharger
+        </button>
     </form>
 
     <div class="overflow-x-auto">
@@ -30,7 +33,7 @@
             </thead>
             <tbody>
                 @foreach($files as $file)
-                    <tr class="border-b hover:bg-gray-50">
+                    <tr class="border-b hover:bg-gray-50 transition">
                         <td class="p-3 font-semibold">{{ $file->filename }}</td>
                         <td class="p-3">
                             @if($file->analysis_json)
@@ -38,8 +41,12 @@
                                 <table class="text-xs w-full border bg-gray-100 rounded">
                                     @foreach($data as $key => $value)
                                         <tr>
-                                            <td class="px-2 py-1 font-semibold text-gray-700">{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
-                                            <td class="px-2 py-1">{{ is_array($value) ? implode(', ', $value) : $value }}</td>
+                                            <td class="px-2 py-1 font-semibold text-gray-700">
+                                                {{ ucfirst(str_replace('_', ' ', $key)) }}
+                                            </td>
+                                            <td class="px-2 py-1 max-w-xs truncate">
+                                                {{ is_array($value) ? implode(', ', $value) : $value }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </table>
@@ -47,17 +54,26 @@
                                 <span class="text-gray-400 italic">Non analysé</span>
                             @endif
                         </td>
-                        <td class="p-3 flex flex-col gap-1 sm:flex-row sm:items-center">
-                            <a href="{{ route('files.download', $file->id) }}" class="text-blue-700 hover:underline">Télécharger</a>
+                        <td class="p-3 flex flex-col gap-2 sm:flex-row sm:items-center">
+                            <a href="{{ route('files.download', $file->id) }}"
+                               class="bg-blue-600 text-white px-3 py-1 rounded text-xs shadow hover:bg-blue-700 transition mb-1 sm:mb-0">
+                                Télécharger
+                            </a>
                             @if(auth()->id() === $file->user_id)
                                 <form action="{{ route('files.destroy', $file->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:underline">Supprimer</button>
+                                    <button type="submit"
+                                            class="bg-red-500 text-white px-3 py-1 rounded text-xs shadow hover:bg-red-600 transition mb-1 sm:mb-0">
+                                        Supprimer
+                                    </button>
                                 </form>
                             @endif
                             @if(!$file->analysis_json)
-                                <a href="{{ route('files.analyze', $file->id) }}" class="text-purple-700 hover:underline">Analyser avec OpenAI</a>
+                                <a href="{{ route('files.analyze', $file->id) }}"
+                                   class="bg-purple-600 text-white px-3 py-1 rounded text-xs shadow hover:bg-purple-700 transition">
+                                    Analyser avec OpenAI
+                                </a>
                             @endif
                         </td>
                     </tr>
