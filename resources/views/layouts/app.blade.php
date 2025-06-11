@@ -13,7 +13,9 @@
     {{-- Exemple de navbar --}}
     <nav class="bg-white border-b border-gray-200 px-4 py-3">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="{{ route('dashboard') }}" class="font-bold text-lg">HoliProject</a>
+            <a href="{{ url('/dashboard') }}">Accueil</a>
+
+
             <div>
                 @auth
                     <span class="mr-4">{{ auth()->user()->name }}</span>
