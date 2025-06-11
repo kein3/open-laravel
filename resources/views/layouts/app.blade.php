@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'HoliProject') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- CSS compilé par Tailwind CLI -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-  </head>
-
-  <body class="bg-gray-50 text-gray-800 font-sans antialiased">
-    <div class="min-h-screen flex flex-col">
-      @include('layouts.navigation')
-
-      <main class="flex-1 flex items-center justify-center">
-        <div class="w-full max-w-3xl p-6 sm:p-10">
-          @yield('content')
+    {{-- Charge les assets compilés par Vite (Tailwind + JS) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-gray-100 text-gray-900 antialiased">
+    {{-- Exemple de navbar --}}
+    <nav class="bg-white border-b border-gray-200 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="{{ route('dashboard') }}" class="font-bold text-lg">HoliProject</a>
+            <div>
+                @auth
+                    <span class="mr-4">{{ auth()->user()->name }}</span>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button class="text-red-600 hover:underline">Déconnexion</button>
+                    </form>
+                @endauth
+            </div>
         </div>
-      </main>
-    </div>
-  </body>
+    </nav>
+
+    <main class="py-6">
+        @yield('content')
+    </main>
+</body>
 </html>
