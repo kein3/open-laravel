@@ -24,6 +24,7 @@ Ce projet est un intranet minimaliste, moderne, sécurisé et évolutif, dévelo
 - **Authentification** (login uniquement : seul l’admin peut créer des comptes via Tinker ou migration)
 - **Partage et gestion de fichiers** (upload, téléchargement, suppression, listing)
 - **Intégration IA** (envoi de fichier à OpenAI, résumé automatisé, mini-playground)
+- **Conversations privées** (discussions avec fichiers joints et analyse IA)
 - **Mini-dashboard dynamique** (statistiques clés, derniers fichiers, liens rapides)
 - **Design responsive & minimaliste** (Tailwind CSS, Dark/Light facile à modifier)
 - **Déploiement facile sur Codespaces & cPanel**

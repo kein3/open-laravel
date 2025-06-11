@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileShareController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ConversationController;
 
 // (Décommente si tu ajoutes un vrai contrôleur d’admin)
 // use App\Http\Controllers\Admin\AdminDashboardController;
@@ -47,6 +48,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/files/analyze/{id}', [FileShareController::class, 'analyze'])->name('files.analyze');
     Route::get('/openai', [OpenAIController::class, 'index'])->name('openai.index');
     Route::post('/openai', [OpenAIController::class, 'send'])->name('openai.send');
+
+    // Conversations
+    Route::get('/conversations', [ConversationController::class, 'index'])->name('conversations.index');
+    Route::get('/conversations/create', [ConversationController::class, 'create'])->name('conversations.create');
+    Route::post('/conversations', [ConversationController::class, 'store'])->name('conversations.store');
+    Route::get('/conversations/{id}', [ConversationController::class, 'show'])->name('conversations.show');
+    Route::post('/conversations/{id}/messages', [ConversationController::class, 'storeMessage'])->name('conversations.message.store');
+    Route::get('/attachments/analyze/{id}', [ConversationController::class, 'analyzeAttachment'])->name('attachments.analyze');
 });
 
 // ===============================
